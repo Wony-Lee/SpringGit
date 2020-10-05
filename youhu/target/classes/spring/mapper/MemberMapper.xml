@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="deletemember" parameterType="Member">
-	update member set statez=-1 where midx=?
+	update member set state=-1 where midx=?
 	</delete>
 	
 	

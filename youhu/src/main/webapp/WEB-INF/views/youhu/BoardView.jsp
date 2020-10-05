@@ -14,7 +14,7 @@
 				<ul class="nav flex-column">
 					<li class="nav-item"><a class="nav-link" href="appList">봉사신청</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="ReviewList">분양후기</a>
+					<li class="nav-item"><a class="nav-link" href="reviewList">분양후기</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="boardList">자유게시판</a>
 					</li>
@@ -41,12 +41,13 @@
 								value="${bvo.subject}" placeholder="subject" readonly></td>
 							<td class="text-right m" style="vertical-align: middle;">작성자
 								:</td>
-							<td><input class="form-control" id="name" name="name" value="${bvo.name}"
-								placeholder="Name" readonly></td>
+							<td><input class="form-control" id="name" name="name"
+								value="${bvo.name}" placeholder="Name" readonly></td>
 						</tr>
 						<tr>
 							<td colspan="4"><textarea class="form-control" cols="4"
-									rows="15" id="contents" name="contents" placeholder="Content" readonly>${bvo.contents}</textarea>
+									rows="15" id="contents" name="contents" placeholder="Content"
+									readonly>${bvo.contents}</textarea>
 						</tr>
 						<tr>
 							<td class="text-right" colspan="2">
@@ -66,13 +67,13 @@
 	</div>
 </div>
 <form name="bform" action="boardEdit" method="get">
-<input type="text" name="bidx" value="${bvo.bidx}"/>
-<input type="text" name="midx" value="${bvo.midx}"/>
+	<input type="text" name="bidx" value="${bvo.bidx}" /> <input
+		type="text" name="midx" value="${bvo.midx}" />
 </form>
 <script>
-	function send(){
+	function send() {
 		bform.submit();
-		}
+	}
 </script>
 
 <c:import url="/foot" />

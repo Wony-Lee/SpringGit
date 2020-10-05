@@ -67,7 +67,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbar16">
 				<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="/news">공지사항</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=myctx%>/NewsList">공지사항</a></li>
 						<li class="nav-item"><a class="nav-link" href="/input">입양/분실등록</a></li>
 						<li class="nav-item"><a class="nav-link" href="<%=myctx%>/appList">게시판</a></li>
 						<li class="nav-item"><a class="nav-link" href="/sss.jsp">고객센터</a></li>

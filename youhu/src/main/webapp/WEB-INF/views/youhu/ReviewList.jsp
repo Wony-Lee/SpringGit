@@ -1,110 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<jsp:include page="../top.jsp"/>
-	<p></p>
-	<div class="col-md-12">
-		<div class="row">
-			<!-- nav start -->
-				<div class="col-md-2">
-					<ul class="nav flex-column">
-				  <li class="nav-item">
-				    <a class="nav-link" href="appList">봉사신청</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="ReviewList">분양후기</a>
-				  </li>
-				  <li class="nav-item">
-				    <a class="nav-link" href="boardList">자유게시판</a>
-				  </li>
-					</ul>
-				</div>
-			<!-- nav end -->
-			
-			<div class="col-md-10">
-				<table class="table table-hover">
-					<tr>
-						<th class="text-right m" colspan="3"><h2>분양후기</h2></th>
-						<td class="text-right" colspan="3">
-						<button class="btn btn-outline-success" onclick="location.href='ReviewWrite.do'">리뷰작성</button></td>
-					</tr>
-					<tr>
-						<td>제목 : </td>
-						<td class="text-left-m"><label>뭘까요1?</label></td>
-						<td>제목 :</td>
-						<td class="text-left-m"><label>뭘까요?</label></td>
-						<td>제목  :</td>
-						<td class="text-left-m"><label>뭘까요?</label></td>
-					</tr>
-				
-					<tr class="text-center">		
-						<td colspan="2" style="width:33%;">
-						<div class="justify-content-center" style="border:1px solid gold; width:100%">
-								<img src="../images/a1.jpg" class="rounded" style="width:100%;">
-						</div>
-						</td>
-						
-						<td colspan="2" style="width:33%;">
-						<div class="justify-content-center" style="border:1px solid gold; width:100%">
-						<img src="../images/a1.jpg" class="rounded" alt="Cinque Terre" style="width:100%">
-						</div>
-						</td>
-						
-						<td colspan="2" style="width:33%;">
-						<div class="justify-content-center" style="border:1px solid gold; width:100%">
-						<img src="../images/a1.jpg" class="rounded" alt="Cinque Terre" style="width:100%">
-						</div>
-						</td>
-					</tr>
-					
-					<tr>
-						<td class="text-right" colspan="2"><button class="btn btn-success">상세보기</button></td>
-						<td class="text-right" colspan="2"><button class="btn btn-success">상세보기</button></td>
-						<td class="text-right" colspan="2"><button class="btn btn-success">상세보기</button></td>
-					</tr>
-					
-					<tr>
-						<td>제목 : </td>
-						<td class="text-left-m"><label>뭘까요1?</label></td>
-						<td>제목 :</td>
-						<td class="text-left-m"><label>뭘까요?</label></td>
-						<td>제목  :</td>
-						<td class="text-left-m"><label>뭘까요?</label></td>
-					</tr>
-					
-					<tr class="text-center">		
-						<td colspan="2" style="width:33%;">
-						<div class="justify-content-center" style="border:1px solid gold; width:100%">
-						<img src="../images/a1.jpg" class="rounded" style="width:100%">
-						</div>
-						</td>
-						
-						<td colspan="2" style="width:33%;">
-						<div class="justify-content-center" style="border:1px solid gold; width:100%">
-						<img src="../images/a1.jpg" class="rounded" alt="Cinque Terre" style="width:100%">
-						</div>
-						
-						</td>
-						
-						<td colspan="2" style="width:33%;">
-						<div class="justify-content-center" style="border:1px solid gold; width:100%">
-						<img src="../images/a1.jpg" name="image1" class="rounded" alt="Cinque Terre" style="width:100%">
-						</div>
-						</td>
-					</tr>
-					
-					<tr>
-						<td class="text-right" colspan="2"><button class="btn btn-success">상세보기</button></td>
-						<td class="text-right" colspan="2"><button class="btn btn-success">상세보기</button></td>
-						<td class="text-right" colspan="2"><button class="btn btn-success">상세보기</button></td>
-					</tr>
-					
-					<tr>
-						<td class="text-center" colspan="6">[]1,2,3,4,5[]</td>
-					</tr>
-					
-				</table>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:include page="../top.jsp" />
+<style>
+#s {
+	font-weight: bold;
+	font-size: 14px;
+}
+</style>
+<p></p>
+<div class="container-fluid">
+	<div class="row">
+		<!-- nav start -->
+		<div class="col-md-2">
+			<ul class="nav flex-column">
+				<li class="nav-item"><a class="nav-link" href="appList">봉사신청</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="reviewList">분양후기</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="boardList">자유게시판</a>
+				</li>
+			</ul>
+		</div>
+		<!-- nav end -->
+
+		<!-- Header Start -->
+		<div class="col-md-10">
+			<div class="row">
+				<div class="text-center col-md-10">분양후기</div>
+				<button class="btn btn-outline-success"
+					onclick="location.href='reWrite'">리뷰작성</button>
 			</div>
+			<!-- Header End -->
+
+			<!-- Body Start -->
+			<div class="row">
+				<c:if test="${ReviewList eq null or empty ReviewList}">
+					<div class="text-center col-md-10">게시글 없음 ㅈㅅ;;;</div>
+				</c:if>
+				<c:if test="${ReviewList ne null and not empty ReviewList}">
+					<c:forEach var="rl" items="${ReviewList}" varStatus="re" begin="0"
+						end="14">
+						<div class="m-1" style="width: 30%; height: 100%">
+							<div id="s" class="text-center">
+								제목 : ${rl.subject}
+								<div class="text-left">작성자 : ${rl.name}</div>
+								<div class="text-left">
+									작성일 :
+									<fmt:formatDate value="${rl.indate}" pattern="yyyy-MM-dd" />
+								</div>
+							</div>
+							<a href="#"><img src="Upload/${rl.image1}" class="rounded"
+								style="width: 100%; height: 50%">이미지 클릭</a>
+						</div>
+					</c:forEach>
+				</c:if>
+			</div>
+			<!-- Body End -->
+
 		</div>
 	</div>
+</div>
 
-<jsp:include page="../foot.jsp"/>
+<jsp:include page="../foot.jsp" />

@@ -5,8 +5,8 @@
 <mapper namespace="com.tis.mapper.ReviewMapper">
 	
 	<insert id="reviewInsert" parameterType="Review">
-		insert into Review(Review_seq.nextval, #{subject}, #{name}, 
-		#{content},sysdate,#{image},#{image2},#{downcg_code},#{midx})
+		insert into Review values(Review_seq.nextval, #{subject:VARCHAR}, #{name:VARCHAR}, 
+		#{content:VARCHAR},sysdate,#{image1:VARCHAR},#{center:VARCHAR},#{downcg_code},#{midx})
 	</insert>
 	
 	<select id="getReviewList" resultType="Review">

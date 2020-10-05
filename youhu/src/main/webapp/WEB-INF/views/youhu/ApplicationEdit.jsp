@@ -15,10 +15,10 @@
 				    <a class="nav-link" href="appList">봉사신청</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="../Review/Review">분양후기</a>
+				    <a class="nav-link" href="reviewList">분양후기</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" href="../FreeBoard/Board">자유게시판</a>
+				    <a class="nav-link" href="boardList">자유게시판</a>
 				  </li>
 				</ul>
 			</div>
