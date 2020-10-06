@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  <mapper namespace="common.mapper.AnimalMapper">   -->
+<mapper namespace="com.tis.mapper.AnimalMapper">
+
+	<!-- form(종류) 별로 정보 가져오기 mybatis-config.xml에서 typeAlias지정 anim.domain.AnimalVO를 
+		Animal으로 alias지정함 -->
+	<select id="selectByFormS" parameterType="string"
+		resultType="Animal"> <!-- 보호동물 가져오기 -->
+		select
+		<include refid="inputBoard_column" />
+		from inputBoard where astate=1 and form=#{value}
+		order by iidx desc
+	</select>
+	
+	<select id="selectByFormA" parameterType="string"
+		resultType="Animal">  <!-- 입양동물 가져오기 -->
+		select
+		<include refid="inputBoard_column" />
+		from inputBoard where astate=2 and form=#{value}
+		order by iidx desc
+	</select>
+	
+	<!-- 유기동물 등록 -->
+	<insert id="animInsert" parameterType="Animal">
+		insert into inputBoard
+		values(inputBoard_seq.nextval,#{name:VARCHAR},#{title:VARCHAR},#{image:VARCHAR},
+		#{color:VARCHAR},#{sex:VARCHAR},#{weight:VARCHAR},#{trans:VARCHAR},#{addr:VARCHAR},
+		#{indate:VARCHAR},#{astate:NUMERIC},#{center:VARCHAR},#{protect:VARCHAR},#{tel:VARCHAR},
+		sysdate,#{form:VARCHAR})
+	</insert>
+	
+	<!-- inputBoard_column 메소드 작성 -->
+	<sql id="inputBoard_column">
+		iidx, name, title, nvl(image,'noimage.png') image, color, sex, weight, trans, addr,
+		indate, astate, center, protect, tel, intdate, form
+	</sql>
+	
+	<!-- 글 번호(iidx)로 상세정보 가져오기 -->
+	<select id="animInfo" resultType="Animal" parameterType="string">
+		select <include refid="inputBoard_column" /> from inputBoard where iidx=#{iidx}
+	</select>
+	
+	<!-- 글 번호로 상세정보에서 등록정보 수정하기 -->
+	<update id="animUpdate" parameterType="Animal">
+		update inputBoard set name=#{name:VARCHAR}, title=#{title:VARCHAR},
+		image=#{image:VARCHAR}, color=#{color:VARCHAR}, sex=#{sex:VARCHAR},
+		weight=#{weight:VARCHAR}, trans=#{trans:VARCHAR}, addr=#{addr:VARCHAR},
+		indate=#{indate:VARCHAR}, center=#{center:VARCHAR},
+		protect=#{protect:VARCHAR}, tel=#{tel:VARCHAR}, form=#{form:VARCHAR},
+		astate=#{astate:NUMERIC}
+		where iidx=#{iidx}
+	</update>
+	
+	<!-- 글 번호로 상세정보에서 등록정보 삭제하기 -->
+	<delete id="animDelete" parameterType="String">
+		delete from inputBoard where iidx=#{iidx}
+	</delete>
+	
+	<!-- iidx(등록번호)로 선택된 해당 애완동물 정보를 수정폼에 불러오는 메소드 -->
+	<select id="selectByUpdForm" resultType="Animal" parameterType="String">
+		select * from inputBoard where iidx=#{iidx}
+	</select>
+	
+	<!-- 겟토탈 카운트 -->
+	<select id="getTotalCount" resultType="int">
+		select count(iidx) from inputBoard
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="paging"  parameterType="map" resultType="Animal">
+			select * from(
+			select rownum rn, a.* from
+			(select * from inputBoard order by iidx desc) a
+			) where rn between #{start} and #{end}
+	</select>
+	
+</mapper>

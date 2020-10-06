@@ -9,25 +9,18 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th class="text-center">공지사항</th>
+							<th class="text-center" colspan="2">공지사항</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>a</td>
-						</tr>
-						<tr>
-							<td>b</td>
-						</tr>
-						<tr>
-							<td>c</td>
-						</tr>
-						<tr>
-							<td>d</td>
-						</tr>
-						<tr>
-							<td>e</td>
-						</tr>
+						<c:if test="${appList ne null and not empty appList}">
+							<c:forEach var="al" items="${appList}" begin="0" end="4">
+								<tr>
+									<td id="app1">신청자 : <a href="appView?aidx=${al.aidx}">${al.name}</a></td>
+									<td id="app2">날짜 : <fmt:formatDate value="${al.wdate}" pattern="yyyy-MM-dd"/></td>
+								</tr>
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</div>

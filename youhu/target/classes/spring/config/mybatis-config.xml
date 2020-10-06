@@ -9,12 +9,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.tis.domain.BoardVO" alias="Board"/>
 		<typeAlias type="com.tis.domain.ReviewVO" alias="Review"/>
 		<typeAlias type="com.tis.domain.NewsVO" alias="News"/>
+		<typeAlias type="com.tis.domain.AnimalVO" alias="Animal"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="spring/mapper/ApplicationMapper.xml"/>
 		<mapper resource="spring/mapper/BoardMapper.xml"/>
 		<mapper resource="spring/mapper/ReviewMapper.xml"/>
-	
+		<mapper resource="spring/mapper/AnimalMapper.xml"/>
 	</mappers>
 </configuration>

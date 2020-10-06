@@ -15,4 +15,16 @@ public class NewsController {
 		
 		return "youhu/NewsList";
 	}
+	
+	@RequestMapping("/Noo")
+	public String Nothing(Model model) {
+	
+		return "Noo";
+	}
+	
+	@RequestMapping("/Noo2")
+	public String Nothing2(Model model) {
+	
+		return "Noo2";
+	}
 }

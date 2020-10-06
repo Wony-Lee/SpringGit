@@ -46,14 +46,14 @@
 	<div class="container">
 		<div class="navbar bg-light navbar-light">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" href="<%=myctx%>/main">ImageLogo</a>
+				<li class="nav-item active"><a class="nav-link" href="<%=myctx%>/main"><img src="images/logo4.png"></a>
 				</li>
 			</ul>
 
 			<ul class="nav navbar-expand-sm bg-light justify-content-right">
-				<li class="nav-item"><a class="nav-link" href="<%=myctx%>/login">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="<%=myctx%>/join">회원가입</a></li>
-				<li class="nav-item"><a class="nav-link" href="/Search.jsp">ID/PWD 찾기</a>
+				<li class="nav-item"><a class="nav-link" href="<%=myctx%>/Noo2">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="<%=myctx%>/Noo2">회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="<%=myctx%>/Noo2">ID/PWD 찾기</a>
 				</li>
 			</ul>
 		</div><!-- top(nav) end -->
@@ -68,11 +68,11 @@
 			<div class="collapse navbar-collapse" id="navbar16">
 				<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="<%=myctx%>/NewsList">공지사항</a></li>
-						<li class="nav-item"><a class="nav-link" href="/input">입양/분실등록</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=myctx%>/animSecure">입양/분실등록</a></li>
 						<li class="nav-item"><a class="nav-link" href="<%=myctx%>/appList">게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="/sss.jsp">고객센터</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">업체정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">후원처</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=myctx%>/Noo">고객센터</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=myctx%>/Noo">업체정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="<%=myctx%>/Noo">후원처</a></li>
 				</ul>
 			</div>
 		</div>
