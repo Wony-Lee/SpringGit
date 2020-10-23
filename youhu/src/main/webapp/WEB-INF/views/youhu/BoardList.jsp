@@ -65,7 +65,9 @@
 
 					<tr>
 						<!-- table foot -->
-						<td class="text-left" colspan="2">[◀] 1,2,3,4,5 [▶]</td>
+						<td class="text-left" colspan="2">
+							${navi}
+						</td>
 						<td class="text-right" colspan="2">
 							<button class="btn btn-outline-success"
 								onclick="location.href='boardWrite'">글 쓰기</button>

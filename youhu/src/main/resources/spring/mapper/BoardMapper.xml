@@ -15,8 +15,17 @@
 	select *from Board order by bidx desc
 </select>
 
+<!-- 페이징처리 -->
+<select id="selectAllBoard" parameterType="map" resultType="Board">
+	select *from(
+	select board.*, row_number() over(order by bidx desc) rn from board)
+	<![CDATA[
+	where rn > #{start} and rn <=#{end}
+	]]>
+</select>
+
 <select id="getBoardCount" resultType="_int">
-	select count(bidx) from Board
+	select count(*) from Board
 </select>
 
 <select id="boardInfo" resultType="Board" parameterType="int">

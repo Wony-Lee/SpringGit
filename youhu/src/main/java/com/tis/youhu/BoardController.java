@@ -3,9 +3,11 @@ package com.tis.youhu;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tis.domain.BoardVO;
+import com.tis.domain.PagingVO;
 import com.tis.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
@@ -24,7 +27,30 @@ public class BoardController {
 	@Inject
 	private BoardService boSvc;
 	
-	@RequestMapping(value="/boardList", method=RequestMethod.GET)
+	@GetMapping("/BoardList")
+	public String getBoardList(Model model, HttpServletRequest req,
+			@ModelAttribute("paing") PagingVO page) {
+		
+		int totalCount = boSvc.getBoardCount(page);
+		
+		page.setTotalCount(totalCount);
+		page.setPagingBlock(5); // 페이징 블럭
+		page.init(req.getSession()); // 페이지 연산 처리 메소드
+		
+		List<BoardVO> boardList = boSvc.selectAllBoard(page);
+		
+		String myctx = req.getContextPath(); // 경로얻기
+		String loc="BoardList";
+		String naviStr = page.getPageNavi(myctx, loc);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("navi", naviStr);
+		model.addAttribute("boardList", boardList);
+		
+		return "youhu/BoardList";
+	}
+	
+	@RequestMapping(value="/boardList_old", method=RequestMethod.GET)
 	public String getBoardList(Model model, @RequestParam(defaultValue="")String midx) {
 		
 		int count = this.boSvc.getBoardCount();
