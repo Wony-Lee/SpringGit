@@ -1,0 +1,201 @@
+SQL
+
+1. Create
+
+ApplicationView <===============================
+
+CREATE TABLE ApplicationView (
+	aidx number(20) NOT NULL, /* 글번호 */
+	name varchar2(30) NOT NULL, /* 회원이름 */
+	sex number(2), /* 성별 */
+	birth varchar2(6), /* 생년월일 */
+	tel varchar2(20) NOT NULL, /* 연락처 */
+	post varchar2(20) NOT NULL, /* 우편번호 */
+	addr1 varchar2(200) NOT NULL, /* 주소1 */
+	addr2 varchar2(200) NOT NULL, /* 주소2 */
+	contents varchar2(1000), /* 내용 */
+	wdate DATE, /* 신청일 */
+	midx number(8), /* 회원번호 */
+	downCg_code number(8) /* downCg_code */
+);
+
+ALTER TABLE ApplicationView
+	ADD
+		CONSTRAINT PK_ApplicationView
+		PRIMARY KEY (
+			aidx
+		);
+
+create sequence applicationview_seq
+start with 1
+increment by 1
+nocache;
+===========================================
+
+Review <=====================================
+CREATE TABLE Review (
+	ridx number(20) NOT NULL, /* 글번호 */
+	subject varchar2(50) NOT NULL, /* 제목 */
+	name varchar2(30) NOT NULL, /* 작성자 */
+	content varchar2(1000) NOT NULL, /* 내용 */
+	indate DATE, /* 작성일 */
+	image1 varchar2(1000) NOT NULL, /* 사진 */
+	center varchar2(100), /* 센터 */
+	downCg_code number(8), /* downCg_code */
+	midx number(8) /* 회원번호 */
+);
+
+ALTER TABLE Review
+	ADD
+		CONSTRAINT PK_Review
+		PRIMARY KEY (
+			ridx
+		);
+
+
+create sequence Review_seq
+start with 1
+increment by 1
+nocache;
+
+===========================================
+
+Board <======================================
+
+CREATE TABLE Board (
+	bidx number(20) NOT NULL, /* 글번호 */
+	subject varchar2(50) NOT NULL, /* 제목 */
+	name varchar2(30) NOT NULL, /* 작성자 */
+	contents varchar2(1000) NOT NULL, /* 내용 */
+	indate DATE, /* 작성일 */
+	midx number(8), /* 회원번호 */
+	downCg_code number(8) /* downCg_code */
+);
+
+ALTER TABLE Board
+	ADD
+		CONSTRAINT PK_Board
+		PRIMARY KEY (
+			bidx
+		);
+
+create sequence board_seq
+start with 1
+increment by 1
+nocache;
+===========================================
+
+
+User <=======================================
+
+create table user_table(
+idx number(10) primary key,
+id varchar2(20),
+pwd varchar2(30),
+name varchar2(20),
+sex varchar2(6),
+birth varchar2(20),
+post varchar2(10),
+addr1 varchar2(200),
+addr2 varchar2(200),
+email varchar2(50),
+state varchar(10)
+);
+
+create sequence user_table_seq
+start with 1
+increment by 1
+nocache;
+
+============================================
+
+
+Upcategory <===================================
+
+CREATE TABLE upCategory (
+	upCg_code number(8) NOT NULL, /* upCg_code */
+	upCg_name VARCHAR2(30) NOT NULL /* upCg_name */
+);
+
+ALTER TABLE upCategory
+	ADD
+		CONSTRAINT PK_upCategory
+		PRIMARY KEY (
+			upCg_code
+		);
+
+=============================================
+
+
+DownCategory <==================================
+
+CREATE TABLE downCategory (
+	downCg_code number(8) NOT NULL, /* downCg_code */
+	downCg_name varchar2(30) NOT NULL, /* downCg_name */
+	upCg_code number(8) NOT NULL /* upCg_code */
+);
+
+ALTER TABLE downCategory
+	ADD
+		CONSTRAINT PK_downCategory
+		PRIMARY KEY (
+			downCg_code
+		);
+=============================================
+
+InputBoard <=====================================
+
+CREATE TABLE inputBoard (
+   iidx number(20) NOT NULL,
+   name VARCHAR2(200) NOT NULL,
+   title VARCHAR2(200) NOT NULL,
+   image VARCHAR2(200) default 'noimage.png',
+   color VARCHAR2(200) NOT NULL,
+   sex varchar2(200) NOT NULL,
+   weight varchar2(200),
+   trans varchar2(200),
+   addr VARCHAR2(200),
+   indate varchar2(100),
+   astate number(20) NOT NULL,
+   center VARCHAR2(500),
+   protect VARCHAR2(200) NOT NULL,
+   tel varchar2(200) NOT NULL,
+   intdate date default sysdate,
+   form varchar2(200)
+);
+
+ALTER TABLE inputBoard
+   ADD
+      CONSTRAINT PK_inputBoard
+      PRIMARY KEY (
+         iidx
+      );
+
+DROP TABLE inputBoard CASCADE CONSTRAINTS;
+
+select * from user_sequences; --전체 시퀀스 조회
+
+drop sequence inputBoard_seq;
+
+CREATE SEQUENCE inputBoard_seq NOCACHE;
+=============================================
+
+
+=============================================
+2. Insert 
+
+upcategory
+
+insert into upcategory(upcg_code, upcg_name)
+values(9000,'dumi');
+
+insert into upcategory(upcg_code, upcg_name)
+values(8000,'Review');
+
+insert into downcategory(downcg_code, downcg_name,upcg_code)
+values(6000,'Review',8000);
+
+insert into downcategory(downcg_code, downcg_name,upcg_code)
+values(7000,'down_dumi',9000);
+
+/* 더미 테이블 생성 */
